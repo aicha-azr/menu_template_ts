@@ -2,6 +2,7 @@ import { useEffect} from 'react'
 import './App.css'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import MenuPage from './pages/MenuPage'
+import ProductPage from './pages/ProductPage';
 
 function App() {
  
@@ -27,7 +28,7 @@ function App() {
          <Routes>
         
         <Route path="/menu" element={<MenuPage />} />
-       
+        <Route path='/menu/:type' element={<ProductPage/>} />
       
       </Routes>
     </>
