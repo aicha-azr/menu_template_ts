@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Minus, Plus, ShoppingBag, X } from "lucide-react";
-
+import {Dish} from '../pages/MenuPage';
 import 'aos/dist/aos.css';
 import axios from "axios";
 import Aos from "aos";
@@ -19,13 +19,13 @@ interface Product {
 }
 
 interface ContentProps {
-  product: Product;
+  product: Product| Dish | null ;
   visible: boolean;
   onClose: () => void;
 }
 
 const Content: React.FC<ContentProps> = ({ product, onClose }) => {
-  const [quantity, setQuantity] = useState<number>(product.quantity);
+  const [quantity, setQuantity] = useState<number>(product?.quantity || 0);
   const [showAlert, setShowAlert] = useState<boolean>(false);
 
   useEffect(() => {
@@ -33,6 +33,7 @@ const Content: React.FC<ContentProps> = ({ product, onClose }) => {
   }, []);
 
   const updateQuantityInDatabase = async (newQuantity: number) => {
+    if (!product) return; // Add a check for product
     const updatedProduct = { ...product, quantity: newQuantity };
     try {
       await axios.put(`https://json-4m9i.onrender.com/dishes/${product.id}`, updatedProduct);
@@ -49,20 +50,21 @@ const Content: React.FC<ContentProps> = ({ product, onClose }) => {
   };
 
   const increment = () => {
+    if (!product) return; // Add a check for product
     const newQuantity = quantity + 1;
     setQuantity(newQuantity);
     updateQuantityInDatabase(newQuantity);
   };
 
   const decrement = () => {
-    if (quantity > 1) {
-      const newQuantity = quantity - 1;
-      setQuantity(newQuantity);
-      updateQuantityInDatabase(newQuantity);
-    }
+    if (!product || quantity <= 1) return; // Add a check for product and quantity
+    const newQuantity = quantity - 1;
+    setQuantity(newQuantity);
+    updateQuantityInDatabase(newQuantity);
   };
 
   const addToCart = async () => {
+    if (!product) return; // Add a check for product
     const productToAdd = { ...product, quantity };
     try {
       const response = await axios.post("https://json-4m9i.onrender.com/cart", productToAdd);
@@ -71,6 +73,16 @@ const Content: React.FC<ContentProps> = ({ product, onClose }) => {
       console.log('Error adding to cart:', error);
     }
   };
+
+  if (!product) return null; // Add a check for product before rendering
+
+
+
+
+
+
+
+
 
   return (
     <>

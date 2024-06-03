@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 
@@ -17,10 +16,14 @@ import Products from "../Components/Products";
 interface Dish {
   id: number;
   title: string;
+  type: string;
   image: string;
   price: number;
-  type: string;
   description: string;
+  quantity: number;
+  popular?: boolean;
+  promotion?:boolean;
+  proprice: number;
 }
 
 const ProductPage: React.FC = () => {
@@ -111,7 +114,7 @@ const ProductPage: React.FC = () => {
           )}
           {productVisible && selectedProduct && (
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
-              <Content product={selectedProduct} onClose={() => setProductVisible(false)} />
+              <Content product={selectedProduct} visible={productVisible} onClose={() => setProductVisible(false)} />
             </div>
           )}
           {showAlert && (

@@ -12,11 +12,14 @@ import NavBar from "../Components/NavBar";
 interface Product {
   id: number;
   title: string;
+  type: string;
   image: string;
   price: number;
   description: string;
-  promotion?: boolean;
+  quantity: number;
   popular?: boolean;
+  promotion?:boolean;
+  proprice: number;
 }
 
 const Page: React.FC = () => {
@@ -105,7 +108,7 @@ const Page: React.FC = () => {
               </div>
               {productVisible && selectedProduct && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
-                  <Content product={selectedProduct} onClose={() => setProductVisible(false)} />
+                  <Content product={selectedProduct} visible={productVisible} onClose={() => setProductVisible(false)} />
                 </div>
               )}
               {showAlert && (

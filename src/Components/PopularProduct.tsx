@@ -3,6 +3,20 @@ import Product from "../DB/PopularProduct";
 import Add from "./AddToCart";
 import Content from "./ProductContent";
 
+interface ProductItem {
+  id: number;
+  image: string;
+  title: string;
+  price: number;
+  description: string;
+  popular: boolean;
+  promotion: boolean;
+  ingredients?: string;
+  proprice: number;
+  type: string;
+  quantity: number;
+}
+
 const PopularProduct: React.FC = () => {
   const [selectedProduct, setSelectedProduct] = useState<ProductItem | null>(null);
   const [productVisible, setProductVisible] = useState<boolean>(false);
@@ -11,23 +25,13 @@ const PopularProduct: React.FC = () => {
 
   const handleClick = () => {
     setShowAlert(true);
+    setShowNotification(true);
     setTimeout(() => {
       setShowAlert(false);
+      setShowNotification(false);
     }, 2000);
   };
-  interface ProductItem {
-    id: number;
-    image: string;
-    title: string;
-    price: number;
-    description: string;
-    popular: boolean;
-    promotion: boolean;
-    ingredients?: string;
-    proprice: number;
-    type: string;
-    quantity: number;
-}
+
   const toggleProduct = (item: ProductItem) => {
     setProductVisible(!productVisible);
     setSelectedProduct(item);

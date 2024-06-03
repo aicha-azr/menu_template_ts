@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Check, Copy, Facebook, Instagram, MapPin, MessageSquareWarning, Phone, Twitter, Wifi } from "lucide-react";
+import { Check, Copy, Facebook, Instagram, MessageSquareWarning, Twitter, Wifi } from "lucide-react";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 interface InfoData {
     logo: string;

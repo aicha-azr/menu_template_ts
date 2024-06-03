@@ -12,7 +12,9 @@ interface Product {
   image: string;
   price: number;
   type: string;
+  quantity: number;
   description: string;
+  proprice: number;
 }
 
 const Products: React.FC = () => {
@@ -92,7 +94,7 @@ const Products: React.FC = () => {
       </div>
       {productVisible && selectedProduct && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 backdrop-filter backdrop-blur-sm">
-          <Content product={selectedProduct} onClose={() => setProductVisible(false)} />
+          <Content product={selectedProduct} visible={productVisible} onClose={() => setProductVisible(false)} />
         </div>
       )}
       {showAlert && (

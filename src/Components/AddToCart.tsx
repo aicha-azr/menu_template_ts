@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Plus } from "lucide-react";
 import axios from "axios";
 
@@ -12,13 +12,11 @@ interface Product {
 }
 
 const Add: React.FC<{ Data: Product }> = ({ Data }) => {
-  const [existProduct, setExistProduct] = useState<Product | null>(null);
 
   const DataExist = async () => {
     try {
       const result = await axios.get(`https://json-4m9i.onrender.com/cart/${Data.id}`);
       if (result.data) {
-        setExistProduct(result.data);
         addQuantity(result.data);
       } else {
         addToCart();

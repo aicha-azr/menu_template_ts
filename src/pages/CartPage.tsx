@@ -1,7 +1,5 @@
 import { Banknote, CircleCheck } from "lucide-react";
 import { Minus, Plus, X } from "lucide-react";
-
-
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Cover from "../Components/Cover";
@@ -20,7 +18,6 @@ interface Product {
 const CartPage = () => {
     const [products, setProducts] = useState<Product[]>([]);
     const [PopUp, setPopUp] = useState<boolean>(false);
-    const [productPrice, setProductPrice] = useState<string>('0.00');
     const [reductionPrice, setReductionPrice] = useState<string>('0.00');
 
     useEffect(() => {
@@ -28,7 +25,6 @@ const CartPage = () => {
             try {
                 const result = await axios.get<Product[]>("https://json-4m9i.onrender.com/cart");
                 setProducts(result.data);
-                calculateProductPrice(result.data);
                 calculateReduction(result.data);
             } catch (error) {
                 console.log("Error fetching products:", error);
@@ -86,14 +82,6 @@ const CartPage = () => {
         } catch (error) {
             console.log("Error deleting product:", error);
         }
-    };
-
-    const calculateProductPrice = (products: Product[]) => {
-        let total = 0;
-        products.forEach(item => {
-            total += (item.price * item.quantity);
-        });
-        setProductPrice(total.toFixed(2));
     };
 
     const calculateReduction = (products: Product[]) => {
