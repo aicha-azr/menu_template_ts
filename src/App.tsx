@@ -4,6 +4,8 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import MenuPage from './pages/MenuPage'
 import ProductPage from './pages/ProductPage';
 import Page from './pages/PPage';
+import CartPage from './pages/CartPage';
+import Reclamation from './pages/ReclamationPage';
 
 function App() {
  
@@ -31,6 +33,8 @@ function App() {
         <Route path="/menu" element={<MenuPage />} />
         <Route path='/menu/:type' element={<ProductPage/>} />
         <Route path='/:type' element={<Page />} />
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='/reclamation' element={<Reclamation />} />
       </Routes>
     </>
   )
